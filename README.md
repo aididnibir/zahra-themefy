@@ -2,9 +2,9 @@
 
 [![Generic badge](https://img.shields.io/badge/course%20available%3F-yes-green.svg)](https://shields.io/)
 
-This project is created and intended learn Shopify Theme Development – Online Store 2.0 + TailwindCSS course
+This project is created and intended learn Shopify Theme Development – Online Store 2.0 + Tailwind CSS
 
-## Here is the list of the topic I will try to cover in this course.
+## Here is the list of the topic I will try to cover in this project.
 
 | Status             | Topics                       |
 | ------------------ | ---------------------------- |
