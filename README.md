@@ -6,21 +6,20 @@ This project is created and intended learn Shopify Theme Development – Online 
 
 ## Here is the list of the topic I will try to cover in this course.
 
-| Status             | Lectures                     |
+| Status             | Topics                       |
 | ------------------ | ---------------------------- |
 | :heavy_check_mark: | Installing Development Tools |
 | :heavy_check_mark: | Navigational Bar             |
-| :heavy_check_mark: | 404 Page                     |
-| :heavy_check_mark: | Article Page                 |
-| :heavy_check_mark: | Blog Page                    |
-| :heavy_check_mark: | Cart Page                    |
-| :heavy_check_mark: | Product Collection Page      |
-| :heavy_check_mark: | Collections Page             |
-| :heavy_check_mark: | Homepage (Index)             |
-| :heavy_check_mark: | Pages (About & Contact)      |
-| :heavy_check_mark: | Advanced Product Page        |
-| :heavy_check_mark: | Search Page                  |
-| :hourglass:        | More lessons coming          |
+| :hourglass:        | 404 Page                     |
+| :hourglass:        | Article Page                 |
+| :hourglass:        | Blog Page                    |
+| :hourglass:        | Cart Page                    |
+| :hourglass:        | Product Collection Page      |
+| :hourglass:        | Collections Page             |
+| :hourglass:        | Homepage (Index)             |
+| :hourglass:        | Pages (About & Contact)      |
+| :hourglass:        | Advanced Product Page        |
+| :hourglass:        | Search Page                  |
 
 ## How to use
 
