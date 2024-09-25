@@ -4,7 +4,7 @@
 
 This project is created and intended learn Shopify Theme Development – Online Store 2.0 + Tailwind CSS
 
-## Here is the list of the topic I will try to cover in this course.
+## Here is the list of the topic I will try to cover in this project.
 
 | Status             | Lectures                     |
 | ------------------ | ---------------------------- |
