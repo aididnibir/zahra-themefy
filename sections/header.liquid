@@ -1,9 +1,12 @@
-<div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
+{% assign shop_main_menu = linklists[section.settings.main-menu].links %}
+
+  <div class="relative bg-white" x-data="{ mobileMenuOpen: false }">
+  <!-- Desktop Header -->
   <div class="mx-auto px-4 sm:px-6">
     <div class="flex justify-between items-center py-6 md:justify-start md:space-x-10">
       <!-- STORE NAME / STORE LOGO -->
       <div class="flex justify-start lg:flex-1 truncate">
-        <h1 class="text-xl font-bold truncate">{{ shop.name }}</h1>
+        <h1 class="text-xl font-bold truncate">{{ section.settings.zahra_header_handle }}</h1>
       </div>
 
       <div class="-mr-2 -my-2 ml-3 md:hidden">
@@ -17,7 +20,7 @@
 
       <!-- NAVIGATION MENU -->
       <nav class="hidden md:flex space-x-10">
-        {% for link in linklists.main-menu.links %}
+        {% for link in shop_main_menu %}
           {% assign desktop_menu_link_handle = link.handle | replace: '-', '_' %}
           {% if link.links != blank %}
             <div x-data="{ {{ desktop_menu_link_handle }}: false }" class="relative">
@@ -62,20 +65,21 @@
         </a>
 
         {% if shop.customer_accounts_enabled %}
-            <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
+          <a href="{{ routes.account_login_url }}" class="text-base text-gray-500 hover:text-gray-900">Login</a>
         {% endif %}
         <a href="{{ routes.account_register_url }}" class="text-base text-gray-500 hover:text-gray-900">Register</a>
       </div>
     </div>
   </div>
 
+  <!-- Mobile Header -->
   <div x-show="mobileMenuOpen" class="absolute z-10 top-0 inset-x-0 p-2 transform origin-top-left md:hidden">
     <div class="shadow-lg rounded-lg ring-1 ring-black ring-opacity-5 bg-white w-full">
       <div class="p-5 divide-y-2 divide-gray-50">
         <!-- MOBILE MENU HEADER TITLE PLUS CLOSE BUTTON -->
         <div class="flex items-center justify-between pb-3">
           <div>
-            <h1 class="text-xl font-bold truncate">{{ shop.name }}</h1>
+            <h1 class="text-xl font-bold truncate">{{ section.settings.zahra_header_handle }}</h1>
           </div>
           <div class="-mr-2">
             <button
@@ -90,7 +94,7 @@
         <!-- NAVIGATION LINKS FOR MOBILE MENU -->
         <div class="pt-3">
           <nav class="grid gap-y-7">
-            {% for link in linklists.main-menu.links %}
+            {% for link in shop_main_menu %}
               {% assign mobile_menu_link_handle = link.handle | replace: '-', '_' %}
               {% if link.links != blank %}
                 <div x-data="{ {{ mobile_menu_link_handle }}: false }" class="relative">
@@ -127,3 +131,24 @@
     </div>
   </div>
 </div>
+
+{% schema %}
+  {
+    "name": "Shop Header",
+    "settings": [
+      {
+        "type": "text",
+        "default": "Zahra",
+        "label": "Header Title",
+        "id": "zahra_header_handle",
+        "info": "Set you shop header title"
+      }, {
+        "id": "main-menu",
+        "type": "link_list",
+        "label": "Header Menu",
+        "default": "main-menu",
+        "info": "Choose the menu you want to display in your site header"
+      }
+    ]
+  }
+{% endschema %}
