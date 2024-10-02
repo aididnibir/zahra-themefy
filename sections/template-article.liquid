@@ -1,0 +1,99 @@
+<article class="py-8">
+  {% for block in section.blocks %}
+    {% case block.type %}
+      {% when 'article_title' %}
+        <div class="flex justify-center items-center">
+          <div class="flex flex-col justify-center items-center max-w-7xl text-center">
+            <a href="{{ blog.url }}" class="text-base uppercase text-gray-500 hover:text-gray-900 font-bold">{{ blog.title }}</a>
+            <h1 class="text-4xl md:text-6xl font-medium">{{ article.title }}</h1>
+          </div>
+        </div>
+      {% when 'article_author' %}
+        <div class="flex items-center justify-center">
+          <div class="max-w-7xl text-center">
+            {% if section.settings.enable_author %}
+              <p>{{ article.author }}</p>
+            {% endif %}
+          </div>
+        </div>
+      {% when 'article_published_date' %}
+        <div class="flex items-center justify-center">
+          <div class="max-w-7xl text-center">
+            {% if section.settings.enable_published_date %}
+              <time datetime="{{article.published_at | date: '%d-%m-%Y'}}">{{ article.published_at | date: format: 'on_date' }}</time>
+            {% endif %}
+          </div>
+        </div>
+      {% when 'featured_image' %}
+        <div class="flex justify-center max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidded my-4">
+          {% if article.image != blank %}
+            <image
+              class="w-40 h-80 md:h-96 object-cover object-center"
+              alt="{{article.title}} image"
+              src="{{article.image |  image_url }}" />
+          {% else %}
+            {% assign placehonder_image = 'lifestyle-2' %}
+            {{ placehonder_image | placeholder_svg_tag: 'w-40 h-80 md:h-96 object-cover object-center p-5' }}
+          {% endif %}
+        </div>
+      {% when 'article_content' %}
+        <div class="flex justify-center items-center ">
+          <div class="max-w-7xl">
+            {{ article.content }}
+          </div>
+        </div>
+
+    {% else %}
+      {% endcase %}
+    {% endfor %}
+  </article>
+
+
+  {% schema %}
+    {
+      "name": "Template Article",
+      "settings": [
+        {
+          "default": true,
+          "type": "checkbox",
+          "id": "enable_author",
+          "label": "Display Author Name"
+
+        }, {
+          "default": true,
+          "type": "checkbox",
+          "id": "enable_published_date",
+          "label": "Display Published Date"
+
+        }
+
+      ],
+      "blocks": [
+        {
+          "limit": 1,
+          "name": "Tite",
+          "type": "article_title"
+        },
+        {
+          "limit": 1,
+          "name": "Author",
+          "type": "article_author"
+        },
+        {
+          "limit": 1,
+          "name": "Published Date",
+          "type": "article_published_date"
+        },
+        {
+          "limit": 1,
+          "name": "Thumbnail",
+          "type": "featured_image"
+        }, {
+          "limit": 1,
+          "name": "Content",
+          "type": "article_content"
+        }
+
+      ]
+    }
+  {% endschema %}
