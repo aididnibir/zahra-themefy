@@ -1,0 +1,62 @@
+<div class="flex flex-col h-screen justify-center items-center">
+  <div>
+    {% render 'bankNotes' %}
+  </div>
+  <div class="mt-2">
+    <p class="text-5xl font-bold">
+      {{ section.settings.title }}
+    </p>
+  </div>
+  <div class="my-4">
+    <p class="text-base md:text-xl leading-normal">
+      {{ section.settings.subtext_title }}
+    </p>
+  </div>
+
+  <div class="flex justify-center items-center rounded-md h-10 w-auto bg-[#00598180] hover:bg-[#005981] text-[#000000] hover:text-white">
+    {% if section.settings.button_url == blank %}
+      {% assign button_dynamic_url = shop.secure_url %}
+    {% else %}
+      {% assign button_dynamic_url = section.settings.button_url %}
+    {% endif %}
+    <a href="{{ button_dynamic_url }}" class="px-10">
+      <p class="font-medium text-md ">
+        {{ section.settings.button_lable }}
+      </p>
+    </a>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "404 Template",
+    "tag": "section",
+    "settings": [
+      {
+        "id": "title",
+        "type": "text",
+        "default": "404!",
+        "label": "404 Title",
+        "info": "Set you 404 title"
+      }, {
+        "type": "text",
+        "id": "subtext_title",
+        "label": "404 Subtitle",
+        "info": "Set you 404 subtitle",
+        "default": "The page you are looking for does not exist!"
+      }, {
+        "type": "text",
+        "id": "button_lable",
+        "label": "Button Lable",
+        "default": "Back to homepage!",
+        "info": "Set your 404 btton lable"
+      }, {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button Url",
+        "info": "Set your 404 btton Navigation"
+      }
+    ]
+  }
+{% endschema %}
