@@ -1,52 +1,159 @@
-<article class="py-8">
-  {% for block in section.blocks %}
-    {% case block.type %}
-      {% when 'article_title' %}
-        <div class="flex justify-center items-center">
-          <div class="flex flex-col justify-center items-center max-w-7xl text-center">
-            <a href="{{ blog.url }}" class="text-base uppercase text-gray-500 hover:text-gray-900 font-bold">{{ blog.title }}</a>
-            <h1 class="text-4xl md:text-6xl font-medium">{{ article.title }}</h1>
+<div class="flex flex-col py-8 bg-state-100">
+  <article>
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'article_title' %}
+          <div class="flex justify-center items-center">
+            <div class="flex flex-col justify-center items-center max-w-7xl text-center">
+              <a href="{{ blog.url }}" class="text-base uppercase text-gray-500 hover:text-gray-900 font-bold">{{ blog.title }}</a>
+              <h1 class="text-2xl md:text-4xl font-medium py-5">{{ article.title }}</h1>
+            </div>
           </div>
-        </div>
-      {% when 'article_author' %}
-        <div class="flex items-center justify-center">
-          <div class="max-w-7xl text-center">
-            {% if section.settings.enable_author %}
-              <p>{{ article.author }}</p>
+        {% when 'article_author' %}
+          <div class="flex items-center justify-center">
+            <div class="max-w-7xl text-center">
+              {% if section.settings.enable_author %}
+                <p>{{ article.author }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% when 'article_published_date' %}
+          <div class="flex items-center justify-center">
+            <div class="max-w-7xl text-center">
+              {% if section.settings.enable_published_date %}
+                <time datetime="{{article.published_at | date: '%d-%m-%Y'}}">{{ article.published_at | date: format: 'on_date' }}</time>
+              {% endif %}
+            </div>
+          </div>
+        {% when 'featured_image' %}
+          <div class="flex justify-center max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidded my-4">
+            {% if article.image != blank %}
+              <image
+                class="w-80 h-80 md:h-96 object-cover object-center p-5"
+                alt="{{article.title}} image"
+                src="{{article.image |  image_url }}" />
+            {% else %}
+              {% assign placehonder_image = 'lifestyle-2' %}
+              {{ placehonder_image | placeholder_svg_tag: 'w-80 h-80 md:h-96 object-cover object-center p-5' }}
             {% endif %}
           </div>
-        </div>
-      {% when 'article_published_date' %}
-        <div class="flex items-center justify-center">
-          <div class="max-w-7xl text-center">
-            {% if section.settings.enable_published_date %}
-              <time datetime="{{article.published_at | date: '%d-%m-%Y'}}">{{ article.published_at | date: format: 'on_date' }}</time>
-            {% endif %}
+        {% when 'article_content' %}
+          <div class="flex justify-center items-center">
+            <div class="max-w-7xl text-justify text-sm">
+              {{ article.content }}
+            </div>
           </div>
-        </div>
-      {% when 'featured_image' %}
-        <div class="flex justify-center max-w-7xl bg-blue-100 rounded-lg mx-2 md:mx-auto overflow-hidded my-4">
-          {% if article.image != blank %}
-            <image
-              class="w-40 h-80 md:h-96 object-cover object-center"
-              alt="{{article.title}} image"
-              src="{{article.image |  image_url }}" />
-          {% else %}
-            {% assign placehonder_image = 'lifestyle-2' %}
-            {{ placehonder_image | placeholder_svg_tag: 'w-40 h-80 md:h-96 object-cover object-center p-5' }}
-          {% endif %}
-        </div>
-      {% when 'article_content' %}
-        <div class="flex justify-center items-center ">
-          <div class="max-w-7xl">
-            {{ article.content }}
-          </div>
-        </div>
 
-    {% else %}
-      {% endcase %}
-    {% endfor %}
-  </article>
+      {% else %}
+        {% endcase %}
+      {% endfor %}
+    </article>
+
+
+    {% if blog.comments_enabled? %}
+      {% if article.comments_count > 0 %}
+        <div id="comments" class="flex flex-col justify-center items-center my-5 border-t border-double border-[#005981 pt-5">
+          <div class="flex flex-col max-w-7xl">
+            <p class="text-lg font-bold my-5">
+              Comments Section:
+            </p>
+
+            {% for comment in article.comments %}
+              <div class="flex flex-col max-w-7xl text-justify text-sm my-2 border p-5">
+                <div class="mb-2">
+                  {{ comment.content }}
+                </div>
+                <div class="border-t pt-2">
+                  <p class="font-light text-sm">
+                    {{ comment.author }}
+                    <time datetime="{{comment.created_at | date: '%d-%m-%Y'}}">{{ comment.created_at | date: format: 'on_date' }}</time>
+                  </p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div id="comment_form" class="my-10">
+        {% form 'new_comment'
+          , article %}
+          <div class="flex-1 mx-auto item-center justify-center max-w-4xl px-4">
+            <p class="text-left text-lg font-light mb-5">Leave a comment!</p>
+            {% if form.errors %}
+              <div class="border p-5">
+                <div class="flex flex-row items-center w-full my-3">
+                  <div class="text-red-500">
+                    {% render 'icon-error' %}
+                  </div>
+                  <div class="text-sm font-medium ml-3">
+                    Oh no! Your comment was not posted
+                  </div>
+                </div>
+                <ul class="px-4 mb-3 ml-7 list-decimal">
+                  {% for error in form.errors %}
+                    <li>
+                      <span>{{ form.errors.messages[error] }}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% elsif form.posted_successfully? %}
+              <div class="flex flex-row items-center w-full my-3 p-5">
+                <div class="text-green-500">
+                  {% render 'icon-success' %}
+                </div>
+                <div class="text-sm font-medium ml-3">Comment is posted successfully</div>
+              </div>
+            {% endif %}
+            <div class="px-1 md:flex mb-3">
+              <div class="px-3 md:w-1/2">
+                <lablel for="comment_author" class="text-gray-700 font-medium uppercase text-xs mb-2">Name</lablel>
+                <input
+                  required
+                  type="text"
+                  id="comment_author"
+                  name="comment[author]"
+                  placeholder="Aidid Nibir"
+                  class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none" />
+              </div>
+
+              <div class="px-3 md:w-1/2">
+                <lablel for="comment_email" class="text-gray-700 font-medium uppercase text-xs mb-2">Email</lablel>
+                <input
+                  required
+                  type="text"
+                  id="comment_email"
+                  name="comment[email]"
+                  placeholder="nibir@gmail.com"
+                  class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none" />
+              </div>
+            </div>
+            <div class="px-3 md:w-full">
+              <lablel for="comment_email" class="text-gray-700 font-medium uppercase text-xs mb-2">Comment</lablel>
+              <textarea
+                required
+                type="text"
+                name="comment[body]"
+                placeholder="Your comment based on this article"
+                class="w-full text-gray-700 border py-3 px-4 mb-3 h-24 focus:outline-none"
+                id="comment_content"></textarea>
+
+            </div>
+
+            <div class="flex mb-3">
+              <div class="w-full px-3">
+                <input
+                  type="submit"
+                  class="w-full cursor-pointer px-4 py-2 border text-base font-medium text-white bg-gray-800 hover:bg-gray-900"
+                  value="Post Comment" />
+              </div>
+            </div>
+          </div>
+        {% endform %}
+      </div>
+    {% endif %}
+  </div>
 
 
   {% schema %}

@@ -1,14 +1,60 @@
-<h1>{{ page.title }}</h1>
-{% form 'contact' %}
-  {% if form.posted_successfully? %} Thank you for your contact {% endif %}
-  {{ form.errors | default_errors }}
-  <label for="ContactFormName">name</label>
-  <input type="text" id="ContactFormName" name="contact[name]">
-  <label for="ContactFormEmail">email</label>
-  <input type="email" id="ContactFormEmail" name="contact[email]">
-  <label for="ContactFormPhone">phone</label>
-  <input type="tel" id="ContactFormPhone" name="contact[phone]">
-  <label for="ContactFormMessage">message</label>
-  <textarea rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
-  <input type="submit" value="send">
-{% endform %}
+<div class="flex flex-col w-full h-screen bg-slate-100">
+  {% form 'contact' %}
+    {% if form.posted_successfully? %}
+      Thank you for your contact
+    {% endif %}
+    {{ form.errors | default_errors }}
+    <div class="flex flex-col justify-center items-center">
+      <p class="text-left text-lg font-light mb-5 mt-10 uppercase">Contact us</p>
+      <div class="px-3 md:w-1/2">
+        <lablel for="ContactFormName" class="text-gray-700 font-medium uppercase text-xs mb-2">Name</lablel>
+        <input
+          required
+          type="text"
+          id="ContactFormName"
+          name="contact[name]"
+          placeholder="Aidid Nibir"
+          class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none" />
+      </div>
+
+      <div class="px-3 md:w-1/2">
+        <lablel for="ContactFormName" class="text-gray-700 font-medium uppercase text-xs mb-2">Email</lablel>
+        <input
+          required
+          type="email"
+          id="ContactFormEmail"
+          name="contact[email]"
+          placeholder="aidid.nibir@gmail.com"
+          class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none" />
+      </div>
+
+      <div class="px-3 md:w-1/2">
+        <lablel for="ContactFormName" class="text-gray-700 font-medium uppercase text-xs mb-2">Phone</lablel>
+        <input
+          required
+          type="tel"
+          id="ContactFormPhone"
+          name="contact[phone]"
+          placeholder="+1234567890"
+          class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none" />
+      </div>
+
+      <div class="px-3 md:w-1/2">
+        <label for="ContactFormMessage" class="text-gray-700 font-medium uppercase text-xs mb-2">message</label>
+        <textarea
+          rows="10"
+          name="contact[body]"
+          id="ContactFormMessage"
+          class="w-full text-gray-700 border py-3 px-4 mb-3 focus:outline-none"></textarea>
+      </div>
+
+      <div class="w-1/2 px-3">
+
+        <input
+          value="send"
+          type="submit"
+          class="w-full cursor-pointer px-4 py-2 border text-base font-medium text-white bg-gray-800 hover:bg-gray-900">
+      </div>
+    </div>
+  {% endform %}
+</div>
