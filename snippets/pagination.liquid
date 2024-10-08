@@ -1,0 +1,70 @@
+{% if pagination.pages > 0 %}
+  <nav role="navigation">
+    <ol class="flex flex-row justify-center items-center space-x-5">
+      {%- if pagination.previous -%}
+        <li class="text-black border border-gray-500 p-2 rounded-md">
+          <a href="{{ pagination.previous.url }}" class="text-gray-600">
+            <span aria-hidden="true">&laquo;</span>
+            Previous
+            <span class="sr-only">page</span>
+          </a>
+        </li>
+      {%- else -%}
+        <li class="text-gray-400 border border-gray-300 p-2 rounded-md">
+          <span aria-hidden="true">&laquo;</span>
+          Previous
+          <span class="sr-only">page</span>
+        </li>
+      {%- endif -%}
+
+      {%- for part in pagination.parts -%}
+        {%- if part.is_link -%}
+          <li>
+            <a class="pagination_bubble inline-flex w-12 h-10 items-center justify-center text-gray-500 bg-[#00598180] rounded-full" href="{{ part.url }}">
+              <span class="sr-only">page</span>
+              {{ part.title }}
+            </a>
+          </li>
+        {%- else -%}
+          {%- if part.title == pagination.current_page -%}
+            <li class="shadow-2xl shadow-[#000000] rounded-full">
+              <a class="inline-flex w-12 h-10 items-center justify-center text-white bg-[#005981] rounded-full" aria-current="page">
+                <span class="sr-only">page</span>
+                {{ part.title }}
+              </a>
+            </li>
+          {%- else -%}
+            <li>
+              <span class="sr-only">page</span>
+              {{ part.title }}
+            </li>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+
+      {%- if pagination.next -%}
+        <li class="text-black border border-gray-500 p-2 rounded-md">
+          <a href="{{ pagination.next.url }}" class="text-gray-600">
+            Next
+            <span class="sr-only">page</span>
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      {%- else -%}
+        <li class="text-gray-400 border border-gray-300 p-2 rounded-md">
+          Next
+          <span class="sr-only">page</span>
+          <span aria-hidden="true">&raquo;</span>
+        </li>
+      {%- endif -%}
+    </ol>
+  </nav>
+{% endif %}
+
+
+<style>
+  .sr-only {
+  @apply absolute w-1 h-1 p-0 m-0 overflow-hidden border-0 clip-rect(0 0 0 0);
+  white-space: nowrap;
+}
+</style>
