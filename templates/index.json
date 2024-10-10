@@ -1,0 +1,15 @@
+{
+  "sections": {
+    "store-banner": {
+      "type": "store-banner"
+    },
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "type": "template-collection",
+        "featured-collection": "all"
+      }
+    }
+  },
+  "order": ["store-banner", "featured-collection"]
+}
