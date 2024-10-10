@@ -1,0 +1,10 @@
+{
+  "name": "Template Collection",
+  "wrapper": "div#template-collection",
+  "sections": {
+    "template": {
+      "type": "template-collection"
+    }
+  },
+  "order": ["template"]
+}
