@@ -1,0 +1,10 @@
+{
+  "name": "Template List Collections",
+  "wrapper": "div#template-list-collections",
+  "sections": {
+    "template": {
+      "type": "template-list-collections"
+    }
+  },
+  "order": ["template"]
+}
