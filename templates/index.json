@@ -1,27 +1,37 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "slideshow": {
       "type": "banner",
-      "settings": {}
-    },
-    "list-collection": {
-      "type": "list-collections",
       "settings": {
-        "type": "list-collections",
-        "featured-collection": "all"
       }
     },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "type": "template-collection",
-        "featured-collection": "all"
+        "title": "Featured Collection",
+        "featured_collection": "women",
+        "number_of_products_to_show": 4
+      }
+    },
+    "list-collection": {
+      "type": "list-collections",
+      "settings": {
+        "title": "Shop All Collections"
       }
     },
     "best-seller": {
       "type": "best-seller",
       "settings": {
-        "type": "best-seller"
+        "title": "Shop the best sold item"
       }
     }
   },
