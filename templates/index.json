@@ -1,7 +1,15 @@
 {
   "sections": {
-    "store-banner": {
-      "type": "store-banner"
+    "slideshow": {
+      "type": "banner",
+      "settings": {}
+    },
+    "list-collection": {
+      "type": "list-collections",
+      "settings": {
+        "type": "list-collections",
+        "featured-collection": "all"
+      }
     },
     "featured-collection": {
       "type": "featured-collection",
@@ -9,7 +17,18 @@
         "type": "template-collection",
         "featured-collection": "all"
       }
+    },
+    "best-seller": {
+      "type": "best-seller",
+      "settings": {
+        "type": "best-seller"
+      }
     }
   },
-  "order": ["store-banner", "featured-collection"]
+  "order": [
+    "slideshow",
+    "featured-collection",
+    "list-collection",
+    "best-seller"
+  ]
 }

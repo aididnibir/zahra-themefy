@@ -1,0 +1,37 @@
+<div class="flex flex-row items-center py-10 max-w-6xl mx-auto">
+  <div class="w-[50%] h-96 mr-10">
+    {{ 'product-5' | placeholder_svg_tag: 'w-full h-80 object-cover bg-gray-50' }}
+  </div>
+
+  <div>
+    <h1 class="text-center text-3xl font-bold">{{ section.settings.title }}</h1>
+    <div class="my-10">
+      <button type="button" class="text-lg bg-black text-white px-10 py-5 rounded-lg shadow-md shadow-[#000000B3] hover:bg-slate-800">Buy Now</button>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Best Seller",
+    "settings": [
+      {
+        "id": "title",
+        "type": "text",
+        "label": "Title",
+        "default": "Shop the best sold item"
+      }, {
+        "type": "image_picker",
+        "id": "best-seller-image",
+        "label": "Best seller item photo",
+        "info": "Select Your Best seller photo"
+
+      }
+    ],
+    "presets": [
+      {
+        "name": "Best Seller"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,9 +1,9 @@
 {
   "name": "Template List Collections",
-  "wrapper": "div#template-list-collections",
+  "wrapper": "div#list-collections",
   "sections": {
     "template": {
-      "type": "template-list-collections"
+      "type": "list-collections"
     }
   },
   "order": ["template"]
