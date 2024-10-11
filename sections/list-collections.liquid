@@ -1,12 +1,12 @@
-<div class="flex flex-col items-center my-8">
-  <h1 class="text-3xl font-medium">{{ section.settings.title }}</h1>
+<div class="flex flex-col items-center my-8 py-10 bg-gray-100">
+  <h1 class="text-3xl font-semibold">{{ section.settings.title }}</h1>
 
   <div class="max-w-6xl mx-auto my-3">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
       {% for collection in collections %}
         {% if collection.all_products_count > 0 %}
-          <div class="w-full py-6 px-3">
-            <div class="border bg-white overflow-hidden">
+          <div class="w-full py-6 px-3 bg-white rounded-lg border shadow-2xl shadow-[#00000033]">
+            <div class="border rounded-lg overflow-hidden">
               <a href="{{ collection.url }}">
                 <div class="h-80 overflow-hidden">
                   {% if collection.featured_image != blank %}
@@ -18,11 +18,11 @@
                   <image
                     alt="{{ collection.title | escape }}"
                     src="{{ collection_image | image_url }}"
-                    class="w-full h-full object-cover transition duration-1000 ease-in-out transform hover:scale-105" />
+                    class="w-full h-full object-cover transition duration-1000 ease-in-out transform hover:scale-105 rounded-t-lg" />
                 </div>
               </a>
 
-              <div class="p-4 bg-gray-100">
+              <div class="p-4  bg-[#FAFAFA]">
                 <h1 class="text-xl">{{ collection.title }}</h1>
               </div>
             </div>
@@ -39,10 +39,10 @@
     "name": "Template List Collections",
     "settings": [
       {
-        "type": "text",
         "id": "title",
-        "default": "Collections",
-        "label": "Title"
+        "type": "text",
+        "label": "Title",
+        "default": "Shop All Collections",
       }
     ]
   }
